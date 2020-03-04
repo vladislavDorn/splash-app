@@ -1,0 +1,4 @@
+export const FETCH_IMAGES = 'FETCH_IMAGES'
+export const FETCH_SUCCES = 'FETCH_SUCCES'
+export const FETCH_ERROR = 'FETCH_ERROR'
+export const PAGE_COUNTER = 'PAGE_COUNTER'
