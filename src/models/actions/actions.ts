@@ -14,7 +14,6 @@ export const fetchError = ():any => ({
     type: FETCH_ERROR
 })
 
-export const pageCounter = (count:number) => ({
+export const pageCounter = ():any => ({
     type: PAGE_COUNTER,
-    payload: count
 })

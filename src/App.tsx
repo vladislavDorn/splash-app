@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ApiService from "./services/apiService";
 import { connect, ConnectedProps } from "react-redux";
 import { StoreState } from "./types/types";
-import { fetchSucces, pageCounter } from "./models/actions/actions";
+import { fetchSucces, fetchLoad, pageCounter } from "./models/actions/actions";
 import { imageData } from "./types/interfaces";
 
 import Header from "./components/header";
@@ -15,33 +15,32 @@ interface RootState {
 
 interface RootDispatch {
   fetchSucces: (data: Array<imageData>) => void;
-  pageCounter: (count: number) => void;
+  fetchLoad: () => void;
+  pageCounter: () => void;
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & RootState & RootDispatch;
 
-const App = ({ main, fetchSucces, pageCounter }: Props) => {
+const App = ({ main, fetchSucces, fetchLoad, pageCounter }: Props) => {
   const apiService = new ApiService();
 
   useEffect(() => {
     if (!main.images.length) {
-      apiService.getImages().then(res => fetchSucces(res));
+      apiService.getImages().then(res => {
+        fetchSucces(res);
+        pageCounter();
+      });
     }
   });
 
-  const loadMore = () => {
-    apiService.getImages(main.pageNumber + 1).then(res => {
-      fetchSucces(res)
-      pageCounter(main.pageNumber + 1)
-    });
-  };
+  const loadMore = () => fetchLoad();
 
   return (
     <>
       <Header />
       <ImagesList main={main} />
-      <LoadBtn loadMore={loadMore}/>
+      <LoadBtn loadMore={loadMore} load={main.load} />
     </>
   );
 };
@@ -52,6 +51,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps: RootDispatch = {
   fetchSucces,
+  fetchLoad,
   pageCounter
 };
 

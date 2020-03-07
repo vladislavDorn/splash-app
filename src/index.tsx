@@ -5,7 +5,8 @@ import "./style/style.css";
 import { createStore, applyMiddleware, compose } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddleware from "redux-saga";
-import rootRedusers from "./models/reducers";
+import rootReducer from "./models/reducers";
+import rootSaga from './saga'
 
 declare global {
   interface Window {
@@ -13,12 +14,15 @@ declare global {
   }
 }
 
+const sagaMiddleware = createSagaMiddleware()
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  rootRedusers,
-  composeEnhancers(applyMiddleware(createSagaMiddleware()))
+  rootReducer,
+  composeEnhancers(applyMiddleware(sagaMiddleware))
 );
+
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render(
   <Provider store={store}>

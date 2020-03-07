@@ -6,12 +6,7 @@ export interface ActionTypeWidthArray {
 }
 
 export interface ActionTypeWithOutPayload{
-    type: typeof FETCH_IMAGES | typeof FETCH_ERROR
+    type: typeof FETCH_IMAGES | typeof FETCH_ERROR | typeof PAGE_COUNTER
 }
 
-export interface ActionWidthPayload {
-    type: typeof PAGE_COUNTER,
-    payload: number
-}
-
-export type AllActionTypes = ActionTypeWidthArray | ActionTypeWithOutPayload | ActionWidthPayload
+export type AllActionTypes = ActionTypeWidthArray | ActionTypeWithOutPayload

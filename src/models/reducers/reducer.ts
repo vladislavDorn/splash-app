@@ -12,13 +12,13 @@ const initialState:StoreState = {
 export const mainReducer = (state:StoreState = initialState, action:AllActionTypes) => {
     switch(action.type) {
         case FETCH_SUCCES:
-            return { ...state, images: [...state.images, ...action.payload] }
+            return { ...state, images: [...state.images, ...action.payload], load: false }
         case FETCH_ERROR:
-            return { ...state, error: true }
+            return { ...state, error: true, load: false }
         case FETCH_IMAGES:
-            return { ...state, laod: false }
+            return { ...state, load: true }
         case PAGE_COUNTER:
-            return { ...state, pageNumber: action.payload }
+            return { ...state, pageNumber: state.pageNumber + 1 }
         default:
             return state
     }
