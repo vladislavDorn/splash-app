@@ -10,3 +10,9 @@
     font-size: 30px;
     z-index: 999;
 }
+
+@media (max-width: 420px) {
+    .splash__header {
+        font-size: 25px;
+    }
+}

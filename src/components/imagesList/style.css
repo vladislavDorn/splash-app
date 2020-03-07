@@ -2,15 +2,30 @@
   display: grid;
   grid-gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-auto-rows: 300px;
+  grid-auto-rows: 350px;
   grid-auto-flow: dense;
   margin: 20px 0;
+}
+
+@media (max-width: 620px) {
+  .splash__images_list {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-auto-rows: 250px;
+  }
+}
+
+@media (max-width: 420px) {
+  .splash__images_list {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-auto-rows: 140px;
+  }
 }
 
 .splash__images_item {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2em;
   position: relative;
   box-shadow: 0px 5px 10px rgba(0,0,0,0.6);
   overflow: hidden;

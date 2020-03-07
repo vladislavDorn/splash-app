@@ -17,7 +17,7 @@ const ImagesList = ({ main }: IImagesList) => {
                   <div
                     id={id}
                     className={`splash__images_item ${
-                      height > width ? "vertical" : ""
+                      height > width ? "vertical" : width > height + 2000 ? "horizontal" : ""
                     }`}
                     key={index}
                   >
