@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
-import ApiService from "./services/apiService";
 import { connect, ConnectedProps } from "react-redux";
 import { StoreState } from "./types/types";
-import { fetchSucces, fetchLoad, pageCounter } from "./models/actions/actions";
-import { imageData } from "./types/interfaces";
+import { fetchLoad } from "./models/actions/actions";
 
 import Header from "./components/header";
 import ImagesList from "./components/imagesList";
@@ -14,25 +12,16 @@ interface RootState {
 }
 
 interface RootDispatch {
-  fetchSucces: (data: Array<imageData>) => void;
   fetchLoad: () => void;
-  pageCounter: () => void;
 }
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 type Props = PropsFromRedux & RootState & RootDispatch;
 
-const App = ({ main, fetchSucces, fetchLoad, pageCounter }: Props) => {
-  const apiService = new ApiService();
-
+const App = ({ main, fetchLoad }: Props) => {
   useEffect(() => {
-    if (!main.images.length) {
-      apiService.getImages().then(res => {
-        fetchSucces(res);
-        pageCounter();
-      });
-    }
-  });
+    fetchLoad();
+  }, [fetchLoad]);
 
   const loadMore = () => fetchLoad();
 
@@ -50,9 +39,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps: RootDispatch = {
-  fetchSucces,
-  fetchLoad,
-  pageCounter
+  fetchLoad
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

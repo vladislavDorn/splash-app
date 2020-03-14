@@ -10,11 +10,11 @@ import { StoreState } from "../types/types";
 
 const apiService = new ApiService();
 
-interface RootState {
+interface IRootState {
   main: StoreState;
 }
 
-const getCounter = (state: RootState) => state.main.pageNumber;
+const getCounter = (state: IRootState) => state.main.pageNumber;
 
 function* getFetchImages() {
   try {
